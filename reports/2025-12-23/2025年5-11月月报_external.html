@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品运营数据分析月报 - 外部用户 - 2025年5-11月</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 0;
+            font-size: 15px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+        }
+        .header {
+            background: linear-gradient(135deg, #1f4788 0%, #2c5aa0 100%);
+            color: white;
+            padding: 20px 30px;
+            border-bottom: 4px solid #4a90e2;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+        .header .user-type {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .content {
+            padding: 15px 25px;
+        }
+        .summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            border-left: 5px solid #1f4788;
+        }
+        .summary h2 {
+            color: #1f4788;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .summary-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-top: 3px solid #4a90e2;
+            transition: transform 0.2s;
+        }
+        .summary-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .summary-item .label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .summary-item .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f4788;
+        }
+        .summary-item .label {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        h2 {
+            color: #1f4788;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 22px;
+            font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #e9ecef;
+            scroll-margin-top: 80px;
+        }
+        h3 {
+            color: #2c5aa0;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            scroll-margin-top: 80px;
+        }
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 18px 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #1f4788;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .toc h2 {
+            color: #1f4788;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin: 6px 0;
+            line-height: 1.6;
+        }
+        .toc a {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: #1f4788;
+            text-decoration: underline;
+        }
+        .toc .toc-level-1 {
+            margin-left: 0;
+            font-weight: 600;
+        }
+        .toc .toc-level-2 {
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .toc .toc-level-3 {
+            margin-left: 40px;
+            font-weight: 400;
+            font-size: 13px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            background: linear-gradient(135deg, #1f4788 0%, #2c5aa0 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+        td {
+            text-align: center;
+            font-size: 14px;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .chart-container {
+            text-align: center;
+            margin: 15px 0;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+            height: 350px;
+        }
+        .chart-container canvas {
+            max-height: 350px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #4a90e2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .metric-card .label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .metric-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f4788;
+        }
+        .highlight {
+            background: #fff9e6;
+            padding: 15px;
+            border-left: 5px solid #f39c12;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .highlight h4 {
+            color: #d68910;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .highlight ul {
+            margin-left: 20px;
+            line-height: 2;
+        }
+        .highlight li {
+            margin-bottom: 8px;
+        }
+        .warning {
+            background: #fde8e8;
+            padding: 15px;
+            border-left: 5px solid #e74c3c;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .success {
+            background: #e8f8f5;
+            padding: 15px;
+            border-left: 5px solid #27ae60;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .growth-positive {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        .growth-negative {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 20px 25px;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+            text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e9ecef, transparent);
+            margin: 15px 0;
+        }
+        .gpu-type-table {
+            font-size: 13px;
+        }
+        .gpu-type-table th, .gpu-type-table td {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>产品运营数据分析月报</h1>
+            <div class="subtitle">报告周期：2025年5月 - 2025年11月 | 生成时间：2025年12月13日 23:05:12</div>
+            <div class="user-type">用户类型：外部用户</div>
+        </div>
+        
+        <div class="content">
+            <!-- 目录 -->
+            <div class="toc">
+                <h2>目录</h2>
+                <ul>
+                    <li class="toc-level-1"><a href="#executive-summary">执行摘要</a></li>
+                    <li class="toc-level-1"><a href="#user-data">第一部分：用户数据洞察</a>
+                        <ul>
+                            <li class="toc-level-2"><a href="#user-scale">1.1 用户规模</a></li>
+                            <li class="toc-level-2"><a href="#user-trend">1.2 月度用户趋势</a></li>
+                            <li class="toc-level-2"><a href="#user-identity">1.3 用户身份趋势</a></li>
+                            <li class="toc-level-2"><a href="#user-assets">1.4 用户资产情况</a></li>
+                            <li class="toc-level-2"><a href="#user-activation">1.5 用户激活分析</a></li>
+                            <li class="toc-level-2"><a href="#user-retention">1.6 用户留存分析</a></li>
+                        </ul>
+                    </li>
+                    <li class="toc-level-1"><a href="#commercial-data">第二部分：商业化数据洞察</a>
+                        <ul>
+                            <li class="toc-level-2"><a href="#revenue">2.1 收入表现</a></li>
+                            <li class="toc-level-2"><a href="#consumption">2.2 消费分析</a></li>
+                            <li class="toc-level-2"><a href="#financial-health">2.3 财务健康度</a></li>
+                        </ul>
+                    </li>
+                    <li class="toc-level-1"><a href="#product-usage">第三部分：产品使用情况洞察</a>
+                        <ul>
+                            <li class="toc-level-2"><a href="#dev-usage">3.1 开发机使用情况</a></li>
+                            <li class="toc-level-2"><a href="#train-usage">3.2 训练使用情况</a></li>
+                            <li class="toc-level-2"><a href="#cloud-usage">3.3 云桌面使用情况</a></li>
+                        </ul>
+                    </li>
+                    <li class="toc-level-1"><a href="#gpu-usage">第四部分：GPU使用情况洞察</a>
+                        <ul>
+                            <li class="toc-level-2"><a href="#gpu-train">4.1 训练场景GPU型号使用趋势</a></li>
+                            <li class="toc-level-2"><a href="#gpu-dev">4.2 开发机场景GPU型号使用趋势</a></li>
+                            <li class="toc-level-2"><a href="#gpu-cloud">4.3 云桌面场景GPU型号使用趋势</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 执行摘要 -->
+            <div class="summary" id="executive-summary">
+                <h2>执行摘要</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">总用户数</div>
+                        <div class="value">1239个</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">活跃用户数</div>
+                        <div class="value">409个</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">活跃率</div>
+                        <div class="value">33.01%</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">总充值金额</div>
+                        <div class="value">¥5.43千</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">总消费金额</div>
+                        <div class="value">¥8.05万</div>
+                    </div>
+                </div>
+                
+                <!-- 关键发现与建议（必须在执行摘要中） -->
+                <div class="insights-section" style="margin-top: 30px;">
+                    <h3>关键发现与建议</h3>
+                    
+                    <div class="findings-container" style="margin-bottom: 25px;">
+                        <h4 style="color: #2c5aa0; font-size: 16px; margin-bottom: 15px; font-weight: 600;">核心发现</h4>
+                        <div class="success"><strong>✓ 用户增长加速明显：</strong>11月新增用户533个，较前月增长301个（+129.7%），高于期间平均值177个，增长加速度为正，显示获客能力持续提升。</div>
+<div class="warning"><strong>⚠️ 用户活跃度有待提升：</strong>当前活跃率33.0%，低于行业优秀水平（通常>60%）。11月活跃用户222个，较前月增长123个，需持续优化活跃度。</div>
+<div class="warning"><strong>⚠️ 现金流存在缺口，需重点关注：</strong>总消费¥8.05万超过总充值¥5.43千，缺口¥7.50万，充值消费比6.7%。11月消费¥1.36万，充值¥4.60千，缺口¥9.03千。ARPU仅¥4.38，ARPPU¥217.12，商业化能力需提升。</div>
+<div class="success"><strong>✓ 充值增长强劲，商业化能力提升：</strong>11月充值环比增长567.1%，显著高于期间平均增长179.7%，显示商业化策略有效。</div>
+<div class="warning"><strong>⚠️ 消费大幅下降，产品使用活跃度下滑：</strong>11月消费环比下降68.7%，消费金额从¥4.36万降至¥1.36万，显示产品使用活跃度明显下滑。</div>
+<div class="highlight"><strong>ℹ️ 产品使用分布相对均衡：</strong>11月云桌面使用占比53.1%（729次，156个用户），训练占比32.8%，产品使用分布相对均衡。</div>
+<div class="highlight"><strong>ℹ️ 业务目标：到年底注册用户破1000个：</strong>当前注册用户数1239个，已超过目标1000个，提前达成目标！超出239个用户。</div>
+<div class="highlight"><strong>ℹ️ 业务目标：月活跃用户保持在100个以上：</strong>最近3个月平均活跃用户128个，最低64个，11月活跃用户222个。最低值低于目标100个，需采取措施提升活跃度。</div>
+
+                    </div>
+                    
+                    <div class="recommendations-container">
+                        <h4 style="color: #2c5aa0; font-size: 16px; margin-bottom: 15px; font-weight: 600;">行动建议</h4>
+                        <div class="highlight"><h4>立即行动（本周内）</h4><ul><li>紧急提升充值转化：当前充值用户25个（占活跃用户6.1%），目标提升至122个以上，增加充值¥9.00万以覆盖消费缺口</li><li>紧急分析消费下降原因：11月消费下降¥2.99万，需检查产品可用性、用户满意度、竞品影响等因素</li><li>提升月活跃用户计划（目标达成）：当前最低月活跃用户64个，低于目标100个。本周内启动：1)激活沉睡用户（针对830个沉睡用户，推送个性化激活内容，预期激活率10%）；2)优化产品使用体验（降低使用门槛，预期提升活跃率5%）；3)设计使用激励机制（使用产品送积分，预期提升活跃率5%）。目标：月活跃用户稳定在100个以上，验证标准：每月活跃用户数≥100个</li></ul></div><div class="highlight"><h4>短期行动（1-3个月）</h4><ul><li>提升用户活跃度（具体措施）：当前活跃率33.0%，目标提升至55%以上。1个月内通过以下措施：1)推送个性化内容（基于历史使用偏好，预期激活率5%）；2)设计激活任务（完成3个任务送50元余额，预期激活率8%）；3)优化产品功能（降低使用门槛，预期激活率3%）。目标激活133个用户，预期活跃率从33.0%提升至55%以上，验证标准：活跃率≥55%</li><li>提升商业化能力（具体措施）：当前ARPU¥4.38，ARPPU¥217.12。1个月内通过以下措施提升：1)设计首充优惠（充100送20，预期提升充值转化率10%）；2)推出会员体系（充值满500元送VIP，享受9折优惠）；3)优化充值入口（提升至首页显眼位置，预期提升充值转化率5%）。目标ARPU提升至¥6.57，ARPPU提升至¥282.26，验证标准：ARPU达到¥6.57，ARPPU达到¥282.26</li><li>提升产品使用频次：优化产品功能体验，设计使用激励机制，目标消费恢复至¥4.36万以上</li></ul></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第一部分：用户数据洞察 -->
+            <h2 id="user-data">第一部分：用户数据洞察</h2>
+            
+            <h3 id="user-scale">1.1 用户规模</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="label">总用户数（有效）</div>
+                    <div class="value">1239个</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">活跃用户数</div>
+                    <div class="value">409个</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">活跃率</div>
+                    <div class="value">33.01%</div>
+                </div>
+            </div>
+            
+            <h3 id="user-trend">1.2 月度用户趋势</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>新增用户数</th>
+                        <th>累计用户数</th>
+                        <th>活跃用户数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>44个</td><td>44个</td><td>0个</td></tr>
+<tr><td>2025-06</td><td>48个</td><td>92个</td><td>0个</td></tr>
+<tr><td>2025-07</td><td>141个</td><td>233个</td><td>0个</td></tr>
+<tr><td>2025-08</td><td>139个</td><td>372个</td><td>96个</td></tr>
+<tr><td>2025-09</td><td>102个</td><td>474个</td><td>64个</td></tr>
+<tr><td>2025-10</td><td>232个</td><td>706个</td><td>99个</td></tr>
+<tr><td>2025-11</td><td>533个</td><td>1239个</td><td>222个</td></tr>
+
+                </tbody>
+            </table>
+            
+            <div class="chart-container">
+                <canvas id="activeUsersChart"></canvas>
+            </div>
+            
+            <h3 id="user-identity">1.3 用户身份趋势</h3>
+            <div class="chart-container">
+                <canvas id="userIdentityTrendChart"></canvas>
+            </div>
+            
+            <h3 id="user-assets">1.4 用户资产情况</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>数值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>总现金余额</td><td>¥3.42千</td></tr>
+                    <tr><td>总赠送余额</td><td>¥10.28万</td></tr>
+                    <tr><td>有现金用户数</td><td>30个</td></tr>
+                    <tr><td>有赠送金用户数</td><td>1012个</td></tr>
+                    <tr><td>平均现金余额</td><td>¥2.44</td></tr>
+                    <tr><td>平均赠送余额</td><td>¥73.56</td></tr>
+                </tbody>
+            </table>
+            
+            <!-- 关键名词说明 -->
+            <div style="margin-top: 20px; padding: 12px; background: #f8f9fa; border-radius: 6px; font-size: 12px; color: #666; line-height: 1.8;">
+                <strong style="color: #2c5aa0;">关键名词说明：</strong><br>
+                <span style="margin-right: 25px;"><strong>活跃率</strong> = 活跃用户数 / 总用户数 × 100%，衡量用户活跃程度</span>
+            </div>
+            
+            <h3 id="user-activation">1.5 用户激活分析</h3><p style="color: #666; margin-bottom: 15px;">用户激活定义：从注册到第一次有消费账单的时间</p><div class="metrics-grid" style="margin-bottom: 20px;"><div class="metric-card"><div class="label">总激活用户数</div><div class="value">464个</div></div><div class="metric-card"><div class="label">平均激活天数</div><div class="value">8.7天</div></div></div><h4 style="color: #2c5aa0; font-size: 16px; margin-top: 20px; margin-bottom: 10px;">激活时间分布</h4><table><thead><tr><th>激活时间</th><th>用户数</th><th>占比</th></tr></thead><tbody><tr><td>当天激活</td><td>280个</td><td>60.3%</td></tr><tr><td>1-7天激活</td><td>82个</td><td>17.7%</td></tr><tr><td>8-30天激活</td><td>62个</td><td>13.4%</td></tr><tr><td>31-90天激活</td><td>28个</td><td>6.0%</td></tr><tr><td>90天以上激活</td><td>12个</td><td>2.6%</td></tr></tbody></table><div class="section-divider" style="margin: 30px 0;"></div><h3 id="user-retention">1.6 用户留存分析</h3><p style="color: #666; margin-bottom: 15px;">用户留存定义：从首次消费到最后一次消费的使用留存天数</p><div class="metrics-grid" style="margin-bottom: 20px;"><div class="metric-card"><div class="label">总留存用户数</div><div class="value">464个</div></div><div class="metric-card"><div class="label">平均使用留存天数</div><div class="value">10.4天</div></div><div class="metric-card"><div class="label">平均总留存天数</div><div class="value">63.3天</div></div></div><h4 style="color: #2c5aa0; font-size: 16px; margin-top: 20px; margin-bottom: 10px;">留存时间分布</h4><table><thead><tr><th>留存时间</th><th>用户数</th><th>占比</th></tr></thead><tbody><tr><td>单次使用</td><td>237个</td><td>51.1%</td></tr><tr><td>1-7天留存</td><td>94个</td><td>20.3%</td></tr><tr><td>8-30天留存</td><td>87个</td><td>18.8%</td></tr><tr><td>31-90天留存</td><td>37个</td><td>8.0%</td></tr><tr><td>90天以上留存</td><td>9个</td><td>1.9%</td></tr></tbody></table>
+            
+            <div class="section-divider"></div>
+            
+            <!-- 第二部分：商业化数据洞察 -->
+            <h2 id="commercial-data">第二部分：商业化数据洞察</h2>
+            
+            <h3 id="revenue">2.1 收入表现</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>充值金额</th>
+                        <th>充值订单数</th>
+                        <th>平均充值金额</th>
+                        <th>充值用户数</th>
+                        <th>环比增长率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>¥0.00</td><td>0个</td><td>¥0.00</td><td>0个</td><td class=''>0.00%</td></tr>
+<tr><td>2025-06</td><td>¥0.00</td><td>0个</td><td>¥0.00</td><td>0个</td><td class=''>0.00%</td></tr>
+<tr><td>2025-07</td><td>¥0.00</td><td>0个</td><td>¥0.00</td><td>0个</td><td class=''>0.00%</td></tr>
+<tr><td>2025-08</td><td>¥0.00</td><td>0个</td><td>¥0.00</td><td>0个</td><td class=''>0.00%</td></tr>
+<tr><td>2025-09</td><td>¥135.00</td><td>4个</td><td>¥33.75</td><td>3个</td><td class='growth-positive'>100.00% ⬆️</td></tr>
+<tr><td>2025-10</td><td>¥690.00</td><td>9个</td><td>¥76.67</td><td>6个</td><td class='growth-positive'>411.11% ⬆️</td></tr>
+<tr><td>2025-11</td><td>¥4.60千</td><td>33个</td><td>¥139.48</td><td>16个</td><td class='growth-positive'>567.10% ⬆️</td></tr>
+
+                </tbody>
+            </table>
+            
+            <div class="chart-container">
+                <canvas id="rechargeChart"></canvas>
+            </div>
+            
+            <h3 id="consumption">2.2 消费表现</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>开发机消费</th>
+                        <th>训练消费</th>
+                        <th>云桌面消费</th>
+                        <th>总消费</th>
+                        <th>环比增长率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td class=''>0.00%</td></tr>
+<tr><td>2025-06</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td class=''>0.00%</td></tr>
+<tr><td>2025-07</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td class=''>0.00%</td></tr>
+<tr><td>2025-08</td><td>¥7.33千</td><td>¥7.50千</td><td>¥695.65</td><td>¥1.55万</td><td class='growth-positive'>100.00% ⬆️</td></tr>
+<tr><td>2025-09</td><td>¥3.71千</td><td>¥1.13千</td><td>¥2.91千</td><td>¥7.75千</td><td class='growth-negative'>-50.10% ⬇️</td></tr>
+<tr><td>2025-10</td><td>¥2.03千</td><td>¥408.19</td><td>¥4.11万</td><td>¥4.36万</td><td class='growth-positive'>462.21% ⬆️</td></tr>
+<tr><td>2025-11</td><td>¥2.44千</td><td>¥1.64千</td><td>¥9.56千</td><td>¥1.36万</td><td class='growth-negative'>-68.70% ⬇️</td></tr>
+
+                </tbody>
+            </table>
+            
+            <div class="chart-container">
+                <canvas id="consumeChart"></canvas>
+            </div>
+            
+            <h3>2.2.1 不同用户身份消费趋势</h3>
+            <div class="chart-container">
+                <canvas id="identityConsumeTrendChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="productCompareChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="growthRateChart"></canvas>
+            </div>
+            
+            <h3 id="financial-health">2.3 财务健康度</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>总充值</th>
+                        <th>总消费</th>
+                        <th>净收入</th>
+                        <th>充值消费比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>0.00</td></tr>
+<tr><td>2025-06</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>0.00</td></tr>
+<tr><td>2025-07</td><td>¥0.00</td><td>¥0.00</td><td>¥0.00</td><td>0.00</td></tr>
+<tr><td>2025-08</td><td>¥0.00</td><td>¥1.55万</td><td>¥-15523.67</td><td>0.00</td></tr>
+<tr><td>2025-09</td><td>¥135.00</td><td>¥7.75千</td><td>¥-7611.65</td><td>0.02</td></tr>
+<tr><td>2025-10</td><td>¥690.00</td><td>¥4.36万</td><td>¥-42862.46</td><td>0.02</td></tr>
+<tr><td>2025-11</td><td>¥4.60千</td><td>¥1.36万</td><td>¥-9028.06</td><td>0.34</td></tr>
+
+                </tbody>
+            </table>
+            
+            <!-- 关键名词说明 -->
+            <div style="margin-top: 20px; padding: 12px; background: #f8f9fa; border-radius: 6px; font-size: 12px; color: #666; line-height: 1.8;">
+                <strong style="color: #2c5aa0;">关键名词说明：</strong><br>
+                <span style="margin-right: 25px;"><strong>ARPU</strong>（Average Revenue Per User，平均每用户收入）= 总充值金额 / 总用户数，衡量每个用户平均贡献的收入</span><br>
+                <span style="margin-right: 25px;"><strong>ARPPU</strong>（Average Revenue Per Paying User，平均每付费用户收入）= 总充值金额 / 充值用户数，衡量付费用户的平均贡献</span><br>
+                <span style="margin-right: 25px;"><strong>充值消费比</strong> = 总充值金额 / 总消费金额，>1表示有储备，<1表示有缺口</span><br>
+                <span><strong>环比增长率</strong> = (本月值 - 上月值) / 上月值 × 100%，衡量短期增长趋势</span>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- 第三部分：产品使用情况洞察 -->
+            <h2 id="product-usage">第三部分：产品使用情况洞察</h2>
+            
+            <h3 id="dev-usage">3.1 开发机使用情况</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>使用次数</th>
+                        <th>使用用户数</th>
+                        <th>总运行时长（小时）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-06</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-07</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-08</td><td>287个</td><td>48个</td><td>26.15小时</td></tr>
+<tr><td>2025-09</td><td>105个</td><td>28个</td><td>13.33小时</td></tr>
+<tr><td>2025-10</td><td>125个</td><td>35个</td><td>7.43小时</td></tr>
+<tr><td>2025-11</td><td>193个</td><td>58个</td><td>8.68小时</td></tr>
+
+                </tbody>
+            </table>
+            
+            <h3 id="train-usage">3.2 训练使用情况</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>使用次数</th>
+                        <th>使用用户数</th>
+                        <th>总运行时长（小时）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-06</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-07</td><td>0个</td><td>0个</td><td>0.00小时</td></tr>
+<tr><td>2025-08</td><td>756个</td><td>60个</td><td>28.45小时</td></tr>
+<tr><td>2025-09</td><td>297个</td><td>33个</td><td>4.64小时</td></tr>
+<tr><td>2025-10</td><td>129个</td><td>21个</td><td>2.34小时</td></tr>
+<tr><td>2025-11</td><td>450个</td><td>67个</td><td>9.44小时</td></tr>
+
+                </tbody>
+            </table>
+            
+            <h3 id="cloud-usage">3.3 云桌面使用情况</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>月份</th>
+                        <th>使用次数</th>
+                        <th>使用用户数</th>
+                        <th>总运行时长（分钟）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2025-05</td><td>0个</td><td>0个</td><td>0个分钟</td></tr>
+<tr><td>2025-06</td><td>0个</td><td>0个</td><td>0个分钟</td></tr>
+<tr><td>2025-07</td><td>0个</td><td>0个</td><td>0个分钟</td></tr>
+<tr><td>2025-08</td><td>51个</td><td>10个</td><td>15448个分钟</td></tr>
+<tr><td>2025-09</td><td>73个</td><td>19个</td><td>35310个分钟</td></tr>
+<tr><td>2025-10</td><td>564个</td><td>65个</td><td>504241个分钟</td></tr>
+<tr><td>2025-11</td><td>729个</td><td>156个</td><td>138285个分钟</td></tr>
+
+                </tbody>
+            </table>
+            
+            <h3>3.4 产品使用趋势</h3>
+            <div class="chart-container">
+                <canvas id="productUsageTrendChart"></canvas>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- 第四部分：GPU使用情况洞察 -->
+            <h2 id="gpu-usage">第四部分：GPU使用情况洞察</h2>
+            
+            <h3 id="gpu-train">4.1 训练场景GPU型号使用趋势</h3>
+            <div class="chart-container">
+                <canvas id="gpuTrainTrendChart"></canvas>
+            </div>
+            
+            <h3 id="gpu-dev">4.2 开发机场景GPU型号使用趋势</h3>
+            <div class="chart-container">
+                <canvas id="gpuDevTrendChart"></canvas>
+            </div>
+            
+            <h3 id="gpu-cloud">4.3 云桌面场景GPU型号使用趋势</h3>
+            <div class="chart-container">
+                <canvas id="gpuCloudTrendChart"></canvas>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>本报告由数据分析系统自动生成 | 数据来源：个人用户数据、消费账单、充值订单</p>
+            <p>报告生成时间：2025年12月13日 23:05:12</p>
+        </div>
+    </div>
+    
+    <script>
+        // 等待页面加载完成后再初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+        // Chart.js配置
+            if (typeof Chart !== 'undefined') {
+        Chart.defaults.font.family = "'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif";
+        Chart.defaults.font.size = 14;
+            } else {
+                console.error('Chart.js未加载，图表将无法显示');
+                // 不return，继续执行其他代码
+            }
+        
+        // 活跃用户趋势图
+            const activeUsersCtx = document.getElementById('activeUsersChart');
+            if (activeUsersCtx) {
+                try {
+                    new Chart(activeUsersCtx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                datasets: [{
+                    label: '活跃用户数',
+                    data: [0, 0, 0, 96, 64, 99, 222],
+                    borderColor: '#9b59b6',
+                    backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 8,
+                    pointBackgroundColor: '#4a90e2',
+                    pointBorderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                                    text: '月度活跃用户趋势（5月-11月）',
+                        font: { size: 20, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '活跃用户数'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                }
+            }
+        });
+                } catch (e) {
+                    console.error('初始化activeUsersChart失败:', e);
+                }
+            }
+        
+        // 充值金额趋势图
+        const rechargeCtx = document.getElementById('rechargeChart');
+        if (rechargeCtx) {
+            try {
+                new Chart(rechargeCtx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                datasets: [{
+                    label: '充值金额（元）',
+                    data: [0.0, 0.0, 0.0, 0.0, 135.0, 690.0, 4603.0],
+                    borderColor: '#1f4788',
+                    backgroundColor: 'rgba(31, 71, 136, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 8,
+                    pointBackgroundColor: '#4a90e2',
+                    pointBorderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                                text: '充值金额趋势（5月-11月）',
+                        font: { size: 20, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '充值金额（元）'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                }
+            }
+        });
+            } catch (e) {
+                console.error('初始化rechargeChart失败:', e);
+            }
+        }
+        
+        // 消费金额趋势图
+        const consumeCtx = document.getElementById('consumeChart');
+        if (consumeCtx) {
+            try {
+                new Chart(consumeCtx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                datasets: [{
+                    label: '消费金额（元）',
+                    data: [0.0, 0.0, 0.0, 15523.666479, 7746.653335000001, 43552.456164999996, 13631.058668],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 8,
+                    pointBackgroundColor: '#f39c12',
+                    pointBorderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                                text: '消费金额趋势（5月-11月）',
+                        font: { size: 20, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '消费金额（元）'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                }
+            }
+        });
+            } catch (e) {
+                console.error('初始化consumeChart失败:', e);
+            }
+        }
+        
+        // 各产品线消费对比
+        const productCompareCtx = document.getElementById('productCompareChart');
+        if (productCompareCtx) {
+            try {
+                new Chart(productCompareCtx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                datasets: [{
+                    label: '开发机',
+                    data: [0.0, 0.0, 0.0, 7325.233334, 3705.718667, 2028.1246669999998, 2437.032],
+                    backgroundColor: '#3498db',
+                    borderColor: 'white',
+                    borderWidth: 1.5
+                }, {
+                    label: '训练',
+                    data: [0.0, 0.0, 0.0, 7502.783145, 1132.4046680000001, 408.191498, 1635.5666680000002],
+                    backgroundColor: '#9b59b6',
+                    borderColor: 'white',
+                    borderWidth: 1.5
+                }, {
+                    label: '云桌面',
+                    data: [0.0, 0.0, 0.0, 695.65, 2908.53, 41116.14, 9558.46],
+                    backgroundColor: '#16a085',
+                    borderColor: 'white',
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                                text: '各产品线消费对比（5月-11月）',
+                        font: { size: 20, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '消费金额（元）'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                }
+            }
+        });
+            } catch (e) {
+                console.error('初始化productCompareChart失败:', e);
+            }
+        }
+        
+        // 环比增长率
+        const growthRateCtx = document.getElementById('growthRateChart');
+        if (growthRateCtx) {
+            try {
+        // 准备数据，为每个数据点设置颜色
+                // 使用不同的红色/绿色色调来区分两个系列，同时保持增长红色、下降绿色的规则
+        const rechargeGrowthData = [null, 0.0, 0.0, 0.0, 100.0, 411.11, 567.1];
+        const consumeGrowthData = [null, 0.0, 0.0, 100.0, -50.1, 462.21, -68.7];
+        
+                // 充值环比：增长用深红色，下降用深绿色，null值用灰色
+                const rechargeColors = rechargeGrowthData.map(val => {
+                    if (val === null || val === undefined) return '#95a5a6';
+                    return val > 0 ? '#c0392b' : '#229954';
+                });
+                // 消费环比：增长用浅红色，下降用浅绿色，null值用灰色
+                const consumeColors = consumeGrowthData.map(val => {
+                    if (val === null || val === undefined) return '#95a5a6';
+                    return val > 0 ? '#e74c3c' : '#27ae60';
+                });
+        
+                new Chart(growthRateCtx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                datasets: [{
+                    label: '充值环比',
+                    data: rechargeGrowthData,
+                    backgroundColor: rechargeColors,
+                    borderColor: 'white',
+                        borderWidth: 1.5
+                }, {
+                    label: '消费环比',
+                    data: consumeGrowthData,
+                    backgroundColor: consumeColors,
+                    borderColor: 'white',
+                        borderWidth: 1.5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '充值与消费环比增长率',
+                        font: { size: 20, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            generateLabels: function(chart) {
+                                const original = Chart.defaults.plugins.legend.labels.generateLabels;
+                                const labels = original.call(this, chart);
+                                    // 图例显示基础色：充值环比用深红色，消费环比用浅红色
+                                    // 这样图例颜色和数据条颜色逻辑一致（都是红色系表示增长）
+                                    labels[0].fillStyle = '#c0392b';  // 充值环比用深红色
+                                    labels[1].fillStyle = '#e74c3c';  // 消费环比用浅红色
+                                return labels;
+                            }
+                        }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y.toFixed(2) + '%';
+                                    if (context.parsed.y > 0) {
+                                        label += ' (增长)';
+                                    } else if (context.parsed.y < 0) {
+                                        label += ' (下降)';
+                                    }
+                                    return label;
+                                }
+                            }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: '环比增长率（%）'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                }
+            }
+        });
+            } catch (e) {
+                console.error('初始化growthRateChart失败:', e);
+            }
+        }
+        
+        // 用户身份趋势图
+        const userIdentityTrendCtx = document.getElementById('userIdentityTrendChart');
+        if (userIdentityTrendCtx) {
+            try {
+                const identity_trend_data = {"2025-05": {"高校课题组（教授/研究员/博士/研究生/本科生）": 25, "个人爱好者（学生或转行者想了解学习）": 18, "创新企业（CTO/技术总监/算法工程师）": 1}, "2025-06": {"高校课题组（教授/研究员/博士/研究生/本科生）": 36, "个人爱好者（学生或转行者想了解学习）": 6, "创新企业（CTO/技术总监/算法工程师）": 4, "个人开发者（独立个人算法工程师/研究者）": 2}, "2025-07": {"高校课题组（教授/研究员/博士/研究生/本科生）": 98, "个人开发者（独立个人算法工程师/研究者）": 18, "个人爱好者（学生或转行者想了解学习）": 16, "创新企业（CTO/技术总监/算法工程师）": 6}, "2025-08": {"高校课题组（教授/研究员/博士/研究生/本科生）": 76, "个人爱好者（学生或转行者想了解学习）": 26, "个人开发者（独立个人算法工程师/研究者）": 20, "创新企业（CTO/技术总监/算法工程师）": 15}, "2025-09": {"高校课题组（教授/研究员/博士/研究生/本科生）": 74, "个人开发者（独立个人算法工程师/研究者）": 15, "个人爱好者（学生或转行者想了解学习）": 8, "创新企业（CTO/技术总监/算法工程师）": 4}, "2025-10": {"高校课题组（教授/研究员/博士/研究生/本科生）": 138, "个人开发者（独立个人算法工程师/研究者）": 46, "个人爱好者（学生或转行者想了解学习）": 33, "创新企业（CTO/技术总监/算法工程师）": 12}, "2025-11": {"高校课题组（教授/研究员/博士/研究生/本科生）": 333, "个人开发者（独立个人算法工程师/研究者）": 94, "个人爱好者（学生或转行者想了解学习）": 80, "创新企业（CTO/技术总监/算法工程师）": 23}};
+                const months_list = ["2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11"];
+            
+            // 收集所有用户身份
+            const all_identities = new Set();
+            for (const month_key in identity_trend_data) {
+                const month_data = identity_trend_data[month_key];
+                if (month_data) {
+                    for (const identity in month_data) {
+                        all_identities.add(identity);
+                    }
+                }
+            }
+            const identities_list = Array.from(all_identities).sort();
+            
+            // 简化身份名称显示
+            function simplifyIdentity(identity) {
+                if (!identity) return '其他';
+                if (identity.includes('高校课题组')) return '高校课题组';
+                if (identity.includes('个人爱好者')) return '个人爱好者';
+                if (identity.includes('创新企业')) return '创新企业';
+                if (identity.includes('个人开发者')) return '个人开发者';
+                if (identity.includes('未选择')) return '未选择';
+                return identity;
+            }
+            
+            // 为每个身份创建数据集
+            const identity_datasets = [];
+            const identity_colors = ['#3498db', '#e74c3c', '#f39c12', '#27ae60', '#9b59b6', '#1abc9c', '#34495e'];
+            const rgba_identity_colors = ['rgba(52, 152, 219, 0.1)', 'rgba(231, 76, 60, 0.1)', 'rgba(243, 156, 18, 0.1)', 
+                                          'rgba(39, 174, 96, 0.1)', 'rgba(155, 89, 182, 0.1)', 'rgba(26, 188, 156, 0.1)', 
+                                          'rgba(52, 73, 94, 0.1)'];
+            identities_list.forEach((identity, index) => {
+                const identity_data = months_list.map(month => {
+                    const month_data = identity_trend_data[month] || {};
+                    const value = month_data[identity];
+                    // 处理NaN和null值
+                    if (value === null || value === undefined || isNaN(value)) {
+                        return 0;
+                    }
+                    return parseFloat(value) || 0;
+                });
+                const color_index = index % identity_colors.length;
+                identity_datasets.push({
+                    label: simplifyIdentity(identity),
+                    data: identity_data,
+                    borderColor: identity_colors[color_index],
+                    backgroundColor: rgba_identity_colors[color_index],
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    tension: 0.3
+                });
+            });
+            
+            if (identity_datasets.length > 0) {
+                new Chart(userIdentityTrendCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                        datasets: identity_datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '用户身份趋势（5月-11月）',
+                                font: { size: 20, weight: 'bold' }
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '用户数'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: '月份'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            } catch (e) {
+                console.error('初始化userIdentityTrendChart失败:', e);
+            }
+        }
+        
+        // 不同用户身份消费趋势图
+        const identityConsumeTrendCtx = document.getElementById('identityConsumeTrendChart');
+        if (identityConsumeTrendCtx) {
+            try {
+                const identity_consume_data = {"2025-05": {}, "2025-06": {}, "2025-07": {}, "2025-08": {"高校课题组（教授/研究员/博士/研究生/本科生）": 13519.878316000055, "个人开发者（独立个人算法工程师/研究者）": 1073.9763299999995, "个人爱好者（学生或转行者想了解学习）": 267.57383300000004, "创新企业（CTO/技术总监/算法工程师）": 254.09400000000002}, "2025-09": {"创新企业（CTO/技术总监/算法工程师）": 39.948, "高校课题组（教授/研究员/博士/研究生/本科生）": 7234.147834999999, "个人开发者（独立个人算法工程师/研究者）": 266.233333, "个人爱好者（学生或转行者想了解学习）": 205.85616700000003}, "2025-10": {"高校课题组（教授/研究员/博士/研究生/本科生）": 42102.81166599999, "个人开发者（独立个人算法工程师/研究者）": 811.566666, "创新企业（CTO/技术总监/算法工程师）": 428.2980000000001, "个人爱好者（学生或转行者想了解学习）": 209.77983300000002}, "2025-11": {"高校课题组（教授/研究员/博士/研究生/本科生）": 10781.271835999994, "创新企业（CTO/技术总监/算法工程师）": 317.79233400000004, "个人开发者（独立个人算法工程师/研究者）": 1158.8958339999997, "个人爱好者（学生或转行者想了解学习）": 1225.0874979999999}};
+                const months_list_consume = ["2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11"];
+            
+            // 简化身份名称显示函数
+            function simplifyIdentityConsume(identity) {
+                if (!identity) return '其他';
+                if (identity.includes('高校课题组')) return '高校课题组';
+                if (identity.includes('个人爱好者')) return '个人爱好者';
+                if (identity.includes('创新企业')) return '创新企业';
+                if (identity.includes('个人开发者')) return '个人开发者';
+                if (identity.includes('未选择')) return '未选择';
+                return identity;
+            }
+            
+            // 收集所有用户身份
+            const all_consume_identities = new Set();
+            for (const month_key in identity_consume_data) {
+                const month_data = identity_consume_data[month_key];
+                if (month_data) {
+                    for (const identity in month_data) {
+                        all_consume_identities.add(identity);
+                    }
+                }
+            }
+            const consume_identities_list = Array.from(all_consume_identities).sort();
+            
+            // 为每个身份创建消费数据集
+            const identity_consume_datasets = [];
+            const identity_colors_consume = ['#3498db', '#e74c3c', '#f39c12', '#27ae60', '#9b59b6', '#1abc9c', '#34495e'];
+            const rgba_identity_colors_consume = ['rgba(52, 152, 219, 0.1)', 'rgba(231, 76, 60, 0.1)', 'rgba(243, 156, 18, 0.1)', 
+                                          'rgba(39, 174, 96, 0.1)', 'rgba(155, 89, 182, 0.1)', 'rgba(26, 188, 156, 0.1)', 
+                                          'rgba(52, 73, 94, 0.1)'];
+            consume_identities_list.forEach((identity, index) => {
+                const identity_consume_data_array = months_list_consume.map(month => {
+                    const month_data = identity_consume_data[month] || {};
+                    const value = month_data[identity];
+                    // 处理NaN和null值
+                    if (value === null || value === undefined || isNaN(value)) {
+                        return 0;
+                    }
+                    return parseFloat(value) || 0;
+                });
+                const color_index = index % identity_colors_consume.length;
+                identity_consume_datasets.push({
+                    label: simplifyIdentityConsume(identity),
+                    data: identity_consume_data_array,
+                    borderColor: identity_colors_consume[color_index],
+                    backgroundColor: rgba_identity_colors_consume[color_index],
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    tension: 0.3
+                });
+            });
+            
+            new Chart(identityConsumeTrendCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                    datasets: identity_consume_datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '不同用户身份消费趋势（5月-11月）',
+                            font: { size: 20, weight: 'bold' }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '消费金额（元）'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '月份'
+                            }
+                        }
+                    }
+                }
+            });
+            } catch (e) {
+                console.error('初始化identityConsumeTrendChart失败:', e);
+            }
+        }
+        
+        // 产品使用情况趋势图
+        const productUsageTrendCtx = document.getElementById('productUsageTrendChart');
+        if (productUsageTrendCtx) {
+            try {
+                new Chart(productUsageTrendCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                    datasets: [{
+                        label: '开发机使用次数',
+                        data: [0, 0, 0, 287, 105, 125, 193],
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 8,
+                        pointBackgroundColor: '#3498db',
+                        pointBorderWidth: 2,
+                        tension: 0.3
+                    }, {
+                        label: '训练使用次数',
+                        data: [0, 0, 0, 756, 297, 129, 450],
+                        borderColor: '#9b59b6',
+                        backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 8,
+                        pointBackgroundColor: '#9b59b6',
+                        pointBorderWidth: 2,
+                        tension: 0.3
+                    }, {
+                        label: '云桌面使用次数',
+                        data: [0, 0, 0, 51, 73, 564, 729],
+                        borderColor: '#16a085',
+                        backgroundColor: 'rgba(22, 160, 133, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 8,
+                        pointBackgroundColor: '#16a085',
+                        pointBorderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '产品使用情况趋势（5月-11月）',
+                            font: { size: 20, weight: 'bold' }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '使用次数'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '月份'
+                            }
+                        }
+                    }
+                }
+            });
+            } catch (e) {
+                console.error('初始化productUsageTrendChart失败:', e);
+            }
+        }
+        
+        // GPU型号趋势图 - 为每个场景创建独立图表
+        const gpu_model_trend = {"训练": {"4090": {"次数": [0, 0, 0, 504.0, 254.0, 116.0, 395.0], "时长": [0, 0, 0, 18.54, 256.63, 130.55, 542.5]}, "A10": {"次数": [0, 0, 0, 189.0, 29.0, 10.0, 21.0], "时长": [0, 0, 0, 8.12, 13.63, 10.1, 17.28]}, "L20": {"次数": [0, 0, 0, 42.0, 14.0, 1.0, 25.0], "时长": [0, 0, 0, 61.28, 8.33, 0, 6.57]}, "L4": {"次数": [0, 0, 0, 21.0, 0, 2.0, 9.0], "时长": [0, 0, 0, 0.78, 0, 0, 0.32]}}, "开发机": {"4090": {"次数": [0, 0, 0, 279.0, 101.0, 121.0, 193.0], "时长": [0, 0, 0, 25.87, 12.77, 6.57, 8.68]}, "L4": {"次数": [0, 0, 0, 8.0, 4.0, 4.0, 0], "时长": [0, 0, 0, 0.28, 0.56, 0.86, 0]}}, "云桌面": {"5880": {"次数": [0, 0, 0, 51.0, 73.0, 564.0, 729.0], "时长": [0, 0, 0, 257.47, 588.5, 8404.02, 2304.75]}}};
+        
+        // 通用函数：为场景创建GPU型号趋势图
+        function createGpuScenarioChart(canvasId, scenarioName, scenarioData) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx) return;
+            
+            try {
+                // GPU型号颜色方案（不同GPU型号用不同颜色）
+                const gpu_colors = ['#e74c3c', '#3498db', '#f39c12', '#27ae60', '#9b59b6', '#1abc9c', '#e67e22', '#34495e'];
+                
+                // 将hex颜色转换为rgba
+                function hexToRgba(hex, alpha) {
+                    const num = parseInt(hex.replace('#', ''), 16);
+                    const R = (num >> 16) & 255;
+                    const G = (num >> 8) & 255;
+                    const B = num & 255;
+                    return 'rgba(' + R + ', ' + G + ', ' + B + ', ' + alpha + ')';
+                }
+                
+                // 生成数据集（每个GPU型号显示次数和时长两条线）
+                const datasets = [];
+                const gpu_models = Object.keys(scenarioData || {}).sort();
+                
+                gpu_models.forEach((gpu_model, index) => {
+                    const gpu_data = scenarioData[gpu_model] || {};
+                    const counts = gpu_data['次数'] || [];
+                    const durations = gpu_data['时长'] || [];
+                    
+                    // 检查是否有数据
+                    const has_count_data = counts.some(val => val > 0);
+                    const has_duration_data = durations.some(val => val > 0);
+                    
+                    if (has_count_data || has_duration_data) {
+                        const color = gpu_colors[index % gpu_colors.length];
+                        
+                        // 使用次数线
+                        if (has_count_data) {
+                            datasets.push({
+                                label: gpu_model + '-次数',
+                                data: counts,
+                                borderColor: color,
+                                backgroundColor: hexToRgba(color, 0.1),
+                                borderWidth: 2,
+                                pointRadius: 5,
+                                pointBackgroundColor: color,
+                                pointBorderWidth: 1,
+                                tension: 0.3,
+                                yAxisID: 'y'
+                            });
+                        }
+                        
+                        // 使用时长线（使用虚线区分）
+                        if (has_duration_data) {
+                            datasets.push({
+                                label: gpu_model + '-时长(小时)',
+                                data: durations,
+                                borderColor: color,
+                                backgroundColor: hexToRgba(color, 0.05),
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                pointRadius: 4,
+                                pointBackgroundColor: color,
+                                pointBorderWidth: 1,
+                                tension: 0.3,
+                                yAxisID: 'y1'
+                            });
+                        }
+                    }
+                });
+                
+                if (datasets.length > 0) {
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: ["5月", "6月", "7月", "8月", "9月", "10月", "11月"],
+                            datasets: datasets
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: scenarioName + '场景GPU型号使用趋势（5月-11月）',
+                                    font: { size: 20, weight: 'bold' }
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    labels: {
+                                        boxWidth: 12,
+                                        padding: 8,
+                                        font: { size: 12 }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '使用次数'
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '使用时长（小时）'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: '月份'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error('初始化' + canvasId + '失败:', e);
+            }
+        }
+        
+        // 训练场景GPU趋势图
+        createGpuScenarioChart('gpuTrainTrendChart', '训练', gpu_model_trend['训练'] || {});
+        
+        // 开发机场景GPU趋势图
+        createGpuScenarioChart('gpuDevTrendChart', '开发机', gpu_model_trend['开发机'] || {});
+        
+        // 云桌面场景GPU趋势图
+        createGpuScenarioChart('gpuCloudTrendChart', '云桌面', gpu_model_trend['云桌面'] || {});
+        
+        }); // DOMContentLoaded结束
+    </script>
+</body>
+</html>
